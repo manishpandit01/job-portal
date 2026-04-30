@@ -50,6 +50,14 @@ class JobPost(TimeStamp):
     def __str__(self):
         return self.title
     
+class JobAPplication(TimeStamp):
+    job=models.ForeignKey(JobPost,on_delete=models.CASCADE)
+    name=models.CharField(max_length=100)
+    email=models.EmailField()
+    portfolio_website=models.URLField(blank=True)
+    resume=models.FileField(upload_to="resumes/")
+    cover_letter=models.TextField()
     
-    
-    
+    def __str__(self):
+        return f"{self.name}"
+
