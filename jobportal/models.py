@@ -59,5 +59,26 @@ class JobAPplication(TimeStamp):
     cover_letter=models.TextField()
     
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name}-{self.job.title}"
 
+class Testimonial(TimeStamp):
+    message=models.TextField()
+    image=models.ImageField(upload_to="client_image/",blank=False)
+    name=models.CharField(max_length=20)
+    profession=models.CharField(max_length=20)
+    
+    def __str__(self):
+        return self.name
+
+class Contact(TimeStamp):
+    name=models.CharField(max_length=20)
+    email=models.EmailField()
+    subject=models.CharField(max_length=100)
+    message=models.TextField()
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        ordering=["-created_at"]
+    
