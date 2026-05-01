@@ -14,10 +14,12 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
 
         context["categories"] = Category.objects.all()
+        
+        context["vacancy_count"]=JobPost.objects.count()
 
         context["featured_jobs"] = JobPost.objects.select_related(
             "company", "category"
-        ).order_by("-published_at")[:6]
+        ).order_by("-created_at")[:6]
 
         context["testimonials"] = Testimonial.objects.order_by(
             "-created_at")[:3]
