@@ -50,7 +50,7 @@ class JobPost(TimeStamp):
     def __str__(self):
         return self.title
     
-class JobAPplication(TimeStamp):
+class JobApplication(TimeStamp):
     job=models.ForeignKey(JobPost,on_delete=models.CASCADE)
     name=models.CharField(max_length=100)
     email=models.EmailField()
