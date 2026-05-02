@@ -1,54 +1,27 @@
+ {% load static %}
  <!-- Testimonial Start -->
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container">
                 <h1 class="text-center mb-5">What Our Clients Say!!!</h1>
+                {% for testimonial in testimonials %}
                 <div class="row g-4">
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="testimonial-item bg-light rounded p-4 h-100">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fa fa-quote-left fa-2x text-primary me-3"></i>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-0"></h6>
-                                    <small class="text-muted">Project Manager</small>
-                                </div>
-                            </div>
-                            <p class="mb-3">Found my dream job through JobEntry! The platform is easy to use and has amazing job listings.</p>
-                            <div class="text-center">
-                                <img class="img-fluid rounded-circle" src="" alt="Sarah Johnson" style="width: 60px; height: 60px; object-fit: cover;">
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
                         <div class="testimonial-item bg-light rounded p-4 h-100">
                             <div class="d-flex align-items-center mb-3">
                                 <i class="fa fa-quote-left fa-2x text-primary me-3"></i>
                                 <div class="flex-grow-1">
-                                    <h6 class="mb-0">Mike Chen</h6>
-                                    <small class="text-muted">Software Developer</small>
+                                    <h6 class="mb-0">{{testimonial.name}}</h6>
+                                    <small class="text-muted">{{testimonial.profession}}</small>
                                 </div>
                             </div>
-                            <p class="mb-3">Great experience! JobEntry connected me with top tech companies. Highly recommended!</p>
+                            <p class="mb-3">{{testimonial.message}}</p>
                             <div class="text-center">
-                                <img class="" src="" alt="Mike Chen" style="width: 60px; height: 60px; object-fit: cover;">
+                                <img class="" src="{{testimonial.image.url}}" alt="Mike Chen" style="width: 60px; height: 60px; object-fit: cover;">
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="testimonial-item bg-light rounded p-4 h-100">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="fa fa-quote-left fa-2x text-primary me-3"></i>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-0">Emily Rodriguez</h6>
-                                    <small class="text-muted">Marketing Specialist</small>
-                                </div>
-                            </div>
-                            <p class="mb-3">Professional service and helpful support. I got hired within 3 weeks of registration!</p>
-                            <div class="text-center">
-                                <img class="img-fluid rounded-circle" src="img/testimonial-3.jpg" alt="Emily Rodriguez" style="width: 60px; height: 60px; object-fit: cover;">
-                            </div>
-                        </div>
-                    </div>
+                    </div> 
                 </div>
+                {% endfor %}
             </div>
         </div>
         <!-- Testimonial End -->
