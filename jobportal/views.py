@@ -18,8 +18,7 @@ class HomeView(TemplateView):
         context["vacancy_count"]=JobPost.objects.count()
 
         context["featured_jobs"] = JobPost.objects.select_related(
-            "company", "category"
-        ).order_by("-created_at")[:6]
+            "company", "category").order_by("-created_at")[:6]
 
         context["testimonials"] = Testimonial.objects.order_by(
             "-created_at")[:3]
@@ -27,3 +26,10 @@ class HomeView(TemplateView):
         context["companies"] = Company.objects.order_by("-created_at")[:6]
 
         return context
+
+# class AboutView(TemplateView):
+#     template_name="jobportal/about.html"
+    
+#     def get_context_data(self, **kwargs):
+#         context=super().get_context_data(**kwargs)
+#         context=["our"]
