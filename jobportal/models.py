@@ -82,3 +82,9 @@ class Contact(TimeStamp):
     class Meta:
         ordering=["-created_at"]
     
+class AboutUs(TimeStamp):
+    image1=models.ImageField(upload_to="team_image/%y/%m/%d",blank=False)
+    image2=models.ImageField(upload_to="team_image/%y/%m/%d",blank=False)
+    image3=models.ImageField(upload_to="team_image/%y/%m/%d",blank=False)
+    image4=models.ImageField(upload_to="team_image/%y/%m/%d",blank=False)
+    description=models.TextField()
