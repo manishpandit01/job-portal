@@ -88,3 +88,6 @@ class AboutUs(TimeStamp):
     image3=models.ImageField(upload_to="team_image/%y/%m/%d",blank=False)
     image4=models.ImageField(upload_to="team_image/%y/%m/%d",blank=False)
     description=models.TextField()
+    
+    def __str__(self):
+        return self.description

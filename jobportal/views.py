@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from jobportal.models import Category, JobPost, Testimonial, Company
+from jobportal.models import AboutUs, Category, JobPost, Testimonial, Company
 from django.utils import timezone
 from datetime import timedelta  # noqa: F401
 
@@ -27,9 +27,10 @@ class HomeView(TemplateView):
 
         return context
 
-# class AboutView(TemplateView):
-#     template_name="jobportal/about.html"
+class AboutView(TemplateView):
+    template_name="jobportal/about.html"
     
-#     def get_context_data(self, **kwargs):
-#         context=super().get_context_data(**kwargs)
-        
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context["about_us"]=AboutUs.objects.all()
+        return context
