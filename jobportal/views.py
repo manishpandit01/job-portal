@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import ListView, TemplateView
 from jobportal.models import AboutUs, Category, JobPost, Testimonial, Company
 from django.utils import timezone
 from datetime import timedelta  # noqa: F401
@@ -34,3 +34,13 @@ class AboutView(TemplateView):
         context=super().get_context_data(**kwargs)
         context["about_us"]=AboutUs.objects.all()
         return context
+ 
+class CategoryListView(ListView):
+    model=JobPost
+    template_name="jobportal/list/list.html"
+    context_object_name="posts"
+    
+    def get_queryset(self):
+        return JobPost.objects.filter(created_at__isnull=False).order_by("-created_at")
+    
+    
