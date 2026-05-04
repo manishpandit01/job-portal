@@ -41,6 +41,9 @@ class CategoryListView(ListView):
     context_object_name="posts"
     
     def get_queryset(self):
-        return JobPost.objects.filter(created_at__isnull=False).order_by("-created_at")
+        category_id=self.kwargs.get('category_id')
+        if category_id:
+            return JobPost.objects.filter(category_id=category_id).order_by("-created_at")
     
+        return JobPost.objects.all().order_by("-created_at")
     
