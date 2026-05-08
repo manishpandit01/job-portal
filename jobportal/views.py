@@ -3,7 +3,7 @@ from django.views.generic import ListView, TemplateView
 from jobportal.models import AboutUs, Category, JobPost, Testimonial, Company
 from django.utils import timezone
 from datetime import timedelta  # noqa: F401
-
+from django.db.models import Count
 # Create your views here.
 
 
@@ -35,6 +35,17 @@ class AboutView(TemplateView):
         context["about_us"]=AboutUs.objects.all()
         return context
  
+class JobCategoryView(ListView):
+    model=Category
+    template_name="jobportal/list/category.html"
+    context_object_name="categories"
+    
+    def get_queryset(self):
+       
+        return Category.objects.annotate(job_count=Count("jobpost"))
+       
+    
+    
 class CategoryListView(ListView):
     model=JobPost
     template_name="jobportal/list/list.html"
@@ -42,8 +53,4 @@ class CategoryListView(ListView):
     
     def get_queryset(self):
         category_id=self.kwargs.get('category_id')
-        if category_id:
-            return JobPost.objects.filter(category_id=category_id).order_by("-created_at")
-    
-        return JobPost.objects.all().order_by("-created_at")
-    
+        return JobPost.objects.filter(category_id=category_id).select_related("company","category").order_by("-created_at")
