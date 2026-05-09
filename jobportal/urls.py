@@ -5,6 +5,7 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     path("job-category/",views.JobCategoryView.as_view(),name='category_jobs'),
     path("testimonial/",views.TestimonialView.as_view(),name="testimonial"),
-    path("contact/",views.ContactCreateView.as_view(),name="contact")
+    path("contact/",views.ContactCreateView.as_view(),name="contact"),
+    path("job-list/",views.CategoryListView.as_view(),name="job_list"),
 ]
 
