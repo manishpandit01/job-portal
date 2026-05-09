@@ -4,5 +4,6 @@ urlpatterns = [
     path("",views.HomeView.as_view(),name="home"),
     path('about/', views.AboutView.as_view(), name='about'),
     path("job-category/",views.JobCategoryView.as_view(),name='category_jobs'),
+    path("testimonial/",views.TestimonialView.as_view(),name="testimonial"),
 ]
 

@@ -54,3 +54,8 @@ class CategoryListView(ListView):
     def get_queryset(self):
         category_id=self.kwargs.get('category_id')
         return JobPost.objects.filter(category_id=category_id).select_related("company","category").order_by("-created_at")
+    
+class TestimonialView(ListView):
+    model=Testimonial
+    template_name="jobportal/testimonial/testimonial.html"
+    context_object_name="testimonials"
