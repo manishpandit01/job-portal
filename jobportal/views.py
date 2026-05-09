@@ -1,9 +1,13 @@
+from django.contrib import messages
+
 from django.shortcuts import render
-from django.views.generic import ListView, TemplateView
-from jobportal.models import AboutUs, Category, JobPost, Testimonial, Company
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView, TemplateView
+from jobportal.models import AboutUs, Category, Contact, JobPost, Testimonial, Company
 from django.utils import timezone
 from datetime import timedelta  # noqa: F401
 from django.db.models import Count
+from jobportal.forms import ContactForm
 # Create your views here.
 
 
@@ -59,3 +63,14 @@ class TestimonialView(ListView):
     model=Testimonial
     template_name="jobportal/testimonial/testimonial.html"
     context_object_name="testimonials"
+    
+class ContactCreateView(CreateView):
+    model=Contact
+    template_name="jobportal/contact.html"
+    form_class=ContactForm
+    success_url=reverse_lazy("contact")
+    success_message="your message has been sent sucessfully"
+    
+    def form_invalid(self, form):
+        messages.error(self.request,"There was an error sending your message.pleasecheck the form.")
+        return super().form_invalid(form)
