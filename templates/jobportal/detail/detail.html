@@ -1,0 +1,84 @@
+{% extends "jobportal/base.html" %}
+{% load static %}
+{% block content %}
+   <!-- Job Detail Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                
+                <div class="row gy-5 gx-4">
+                    <div class="col-lg-8">
+                        <div class="d-flex align-items-center mb-5">
+                            <img class="flex-shrink-0 img-fluid border rounded" src="{{post.logo.url}}" alt="" style="width: 100px; height: 100px; object-fit: cover;">
+                            <div class="text-start ps-4">
+                                <h2 class="mb-3">{{post.title}}</h2>
+                                <h5 class="text-muted mb-2">{{post.company.name}}</h5>
+                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{post.location}}</span>
+                                <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{post.get_job_type_display}}</span>
+                                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{post.salary}}</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <h4 class="mb-3">Job Description</h4>
+                            <p>{{post.description}}</p>
+                            
+                            <h4 class="mb-3">Responsibilities</h4>
+                            <p>{{post.responsibility}}</p>
+                            
+                            <h4 class="mb-3">Qualifications</h4>
+                            <p>{{post.qualification}}</p>
+                           
+                        </div>
+        
+                        <div class="">
+                            <h4 class="mb-4">Apply For The Job</h4>
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row g-3">
+                                    <div class="col-12 col-sm-6">
+                                       <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                       <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <input type="url" name="portfolio_website" class="form-control" placeholder="Portfolio Website (Optional)">
+                                     </div>
+                                    <div class="col-12 col-sm-6">
+                                       <input type="file" name="resume" class="form-control" accept=".pdf,.doc,.docx" required>
+                                    </div>
+                                    <div class="col-12">
+                                       <textarea name="cover_letter" class="form-control" rows="5" placeholder="Cover Letter" required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Apply Now</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+        
+                    <div class="col-lg-4">
+                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                            <h4 class="mb-4">Job Summary</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><strong>Posted On:</strong>{{post.created_at|date:"M d,Y"}}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><strong>Category:</strong> {{post.category.name}}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><strong>Job Nature:</strong>{{post.get_job_type_display}}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><strong>Salary:</strong>{{post.salary}}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i><strong>Location:</strong>{{post.location}}</p>
+                            <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i><strong>Last Updated:</strong>{{post.updated_at|date:"M d, Y"}}</p>
+                        </div>
+                        <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
+                            <h4 class="mb-4">Company Details</h4>
+                            <p><strong>{{post.company.name}}</strong></p>
+                            <p class="text-muted">{{post.company.description}}</p>
+                            <p><i class="fa fa-globe text-primary me-2"></i><a href="{{post.company.website}}" target="_blank">{{post.company.website}}</a></p>
+                            <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{post.company.location}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Job Detail End -->
+
+{% endblock content %} 

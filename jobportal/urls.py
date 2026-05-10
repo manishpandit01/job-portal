@@ -7,5 +7,6 @@ urlpatterns = [
     path("testimonial/",views.TestimonialView.as_view(),name="testimonial"),
     path("contact/",views.ContactCreateView.as_view(),name="contact"),
     path("job-list/",views.CategoryListView.as_view(),name="job_list"),
+    path("job-detail/<int:pk>",views.PostDetailView.as_view(),name="job_detail"),
 ]
 

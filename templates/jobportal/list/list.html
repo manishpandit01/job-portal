@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                     <div class="d-flex mb-3 gap-2">
-                                        <a href="job-detail.html" class="btn btn-primary">View Details</a>
+                                        <a href="{% url 'job_detail' post.id %}" class="btn btn-primary">View Details</a>
                                     </div>
                                     <small class="text-muted"><i class="far fa-calendar-alt text-primary me-2"></i>{{post.created_at|date:" F j, Y"}}</small>
                                 </div>
