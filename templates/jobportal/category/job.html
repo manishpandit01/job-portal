@@ -1,0 +1,73 @@
+{% extends "jobportal/base.html" %}
+{% load static %}
+{% block content %}
+ <div class="container py-4">
+  <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">All Available {{category.name}} Job</h1>
+    {% for job in posts %}
+    <div class="card shadow-sm border-0 mb-3 job-card">
+
+        <div class="card-body">
+
+            <div class="d-flex align-items-center justify-content-between">
+
+                <!-- Left Side -->
+                <div class="d-flex align-items-center">
+
+                    <!-- Logo -->
+                    <div class="me-3">
+                        <img src="{{ job.logo.url }}" 
+                             alt="company"
+                            style=" width:80px; height: 80px; object-fit:cover"
+                             class="flex-shrink-0 img-fluid border rounded">
+                    </div>
+
+                    <!-- Job Info -->
+                    <div>
+                        <h5 class="mb-1 fw-bold">{{ job.title }}</h5>
+                        <small class="text-muted">{{ job.company.name }}</small>
+
+                        <div class="d-flex gap-3 mt-2 text-muted small">
+
+                            <span>
+                                <i class="fa fa-map-marker-alt text-primary me-2"></i>
+                                {{ job.location }}
+                            </span>
+
+                            <span>
+                                <i class="fa fa-clock text-primary me-2"></i>
+                                {{ job.job_type }}
+                            </span>
+
+                            <span>
+                                <i class="fa fa-money-bill text-primary me-2"></i>
+                                {{ job.salary }}
+                            </span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Side -->
+                <div class="text-end">
+
+                    <a href="{% url 'job_detail' job.id %}" 
+                       class="btn btn-success btn-sm mb-2">
+                        View Details
+                    </a>
+
+                    <div class="text-muted small">
+                        <i class="fa fa-calendar"></i>
+                        {{ job.created_at|date:"M d, Y" }}
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock  %}

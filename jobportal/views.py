@@ -17,17 +17,18 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["categories"] = Category.objects.all()
+        context["categories"] = Category.objects.annotate(
+            total_jobs=Count("jobpost"))
         
-        context["vacancy_count"]=JobPost.objects.count()
+        # context["vacancy_count"]=JobPost.objects.count()
 
         context["featured_jobs"] = JobPost.objects.select_related(
-            "company", "category").order_by("-created_at")[:6]
+            "company", "category").order_by("-created_at")[:3]
 
         context["testimonials"] = Testimonial.objects.order_by(
             "-created_at")[:3]
 
-        context["companies"] = Company.objects.order_by("-created_at")[:6]
+        context["companies"] = Company.objects.order_by("-created_at")[:4]
 
         return context
 
@@ -45,8 +46,7 @@ class JobCategoryView(ListView):
     context_object_name="categories"
     
     def get_queryset(self):
-       
-        return Category.objects.annotate(job_count=Count("jobpost"))
+        return Category.objects.annotate(total_jobs=Count("jobpost"))
        
 class CategoryListView(ListView):
     model=JobPost
@@ -100,3 +100,12 @@ class PostDetailView(DetailView):
         context=self.get_context_data()
         context["form"]=form
         return self.render_to_response(context)
+    
+class CategoryJobListView(ListView):
+    model=JobPost
+    template_name="jobportal/category/job.html"
+    context_object_name="posts"
+    
+    def get_queryset(self):
+        return JobPost.objects.filter(category_id=self.kwargs["pk"]).select_related("company","category")
+        

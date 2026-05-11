@@ -22,7 +22,7 @@
                                     <span class="badge bg-info">{{job.job_type}}</span>
                                     <span class="badge bg-success">{{job.salary}}</span>
                                 </div>
-                                <a href="job-detail.html" class="btn btn-primary btn-sm">View</a>
+                                <a href="{% url 'job_detail' job.pk %}" class="btn btn-primary btn-sm">View</a>
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                     
                 </div>
                 <div class="text-center mt-5">
-                    <a href="job-list.html" class="btn btn-primary py-3 px-5">Browse All Jobs</a>
+                    <a href="{% url 'job_list' %}" class="btn btn-primary py-3 px-5">Browse All Jobs</a>
                 </div>
             </div>
         </div>
